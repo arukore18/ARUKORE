@@ -1,0 +1,38 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.pdb
+
+# NuGet
+packages/
+*.nupkg
+
+# Publish output
+PublishProfiles/
+*.pubxml.user
+
+# Local / secret config
+appsettings.local.json
+*.secrets.config
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Secret configuration
+**/AppSettingsSecrets.config
+
+# Visual Studio generated files
+.vs/
+bin/
+obj/

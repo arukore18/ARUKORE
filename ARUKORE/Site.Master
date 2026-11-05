@@ -1,0 +1,59 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="ARUKORE.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title><%: Page.Title %></title>
+
+    <link href="~/Content/site.css" rel="stylesheet" runat="server" />
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+
+<body>
+    <form id="form1" runat="server">
+
+        <!-- Header -->
+        <header class="site-header">
+            <a class="logo" href="Default.aspx">ARU<span>KORE.</span></a>
+
+            <nav>
+                <a href="Default.aspx#about">About</a>
+                <a href="Default.aspx#projects">Projects</a>
+                <a href="Contact.aspx">Contact</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </main>
+
+        <!-- Footer -->
+        
+<footer class="site-footer">
+
+    <a class="logo" href="Default.aspx">
+        ARU<span>KORE.</span>
+    </a>
+
+    <p>Designed with purpose. Built with curiosity.</p>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/aru__kore/"
+           target="_blank"
+           rel="noopener noreferrer">
+            Instagram @aru__kore
+        </a>
+    </div>
+
+    <span>© <%: DateTime.Now.Year %> ARU KORE</span>
+
+</footer>
+
+
+    </form>
+</body>
+</html>
