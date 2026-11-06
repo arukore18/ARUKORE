@@ -96,6 +96,15 @@ namespace ARUKORE.Admin
         protected global::System.Web.UI.WebControls.Button btnClearSearch;
 
         /// <summary>
+        /// btnRefresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRefresh;
+
+        /// <summary>
         /// gvMessages control.
         /// </summary>
         /// <remarks>

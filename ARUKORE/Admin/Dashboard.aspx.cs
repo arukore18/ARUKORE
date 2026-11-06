@@ -20,31 +20,28 @@ namespace ARUKORE.Admin
 
             if (!IsPostBack)
             {
-                lblAdmin.Text =
-                    Convert.ToString(Session["AdminUsername"]);
-
+                lblAdmin.Text = Convert.ToString(Session["AdminUsername"]);
                 LoadMessages();
             }
         }
 
-
         private void LoadMessages()
         {
             const string statsQuery = @"
-        SELECT
-            COUNT(*) AS TotalMessages,
-            COALESCE(SUM(CASE WHEN IsRead = 0 THEN 1 ELSE 0 END), 0) AS UnreadMessages,
-            COALESCE(SUM(CASE WHEN IsRead = 1 THEN 1 ELSE 0 END), 0) AS ReadMessages
-        FROM dbo.ContactMessages";
+                SELECT
+                    COUNT(*) AS TotalMessages,
+                    COALESCE(SUM(CASE WHEN IsRead = 0 THEN 1 ELSE 0 END), 0) AS UnreadMessages,
+                    COALESCE(SUM(CASE WHEN IsRead = 1 THEN 1 ELSE 0 END), 0) AS ReadMessages
+                FROM dbo.ContactMessages";
 
             const string messagesQuery = @"
-        SELECT MessageId, SenderName, SenderEmail,
-               Subject, CreatedAt, IsRead
-        FROM dbo.ContactMessages
-        WHERE SenderName LIKE @Search
-           OR SenderEmail LIKE @Search
-           OR ISNULL(Subject, '') LIKE @Search
-        ORDER BY CreatedAt DESC";
+                SELECT MessageId, SenderName, SenderEmail,
+                       Subject, CreatedAt, IsRead
+                FROM dbo.ContactMessages
+                WHERE SenderName LIKE @Search
+                   OR SenderEmail LIKE @Search
+                   OR ISNULL(Subject, '') LIKE @Search
+                ORDER BY CreatedAt DESC";
 
             try
             {
@@ -52,8 +49,7 @@ namespace ARUKORE.Admin
                 {
                     con.Open();
 
-                    using (SqlCommand statsCmd =
-                        new SqlCommand(statsQuery, con))
+                    using (SqlCommand statsCmd = new SqlCommand(statsQuery, con))
                     using (SqlDataReader reader = statsCmd.ExecuteReader())
                     {
                         if (reader.Read())
@@ -71,8 +67,7 @@ namespace ARUKORE.Admin
 
                     string search = "%" + txtSearch.Text.Trim() + "%";
 
-                    using (SqlCommand cmd =
-                        new SqlCommand(messagesQuery, con))
+                    using (SqlCommand cmd = new SqlCommand(messagesQuery, con))
                     {
                         cmd.Parameters.Add("@Search", SqlDbType.NVarChar, 300)
                             .Value = search;
@@ -212,7 +207,6 @@ namespace ARUKORE.Admin
             Context.ApplicationInstance.CompleteRequest();
         }
 
-
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             LoadMessages();
@@ -224,5 +218,20 @@ namespace ARUKORE.Admin
             LoadMessages();
         }
 
+        // REFRESH DASHBOARD
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (Session["AdminId"] == null)
+            {
+                Response.Redirect("~/Admin/Login.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+                return;
+            }
+
+            pnlMessage.Visible = false;
+            lblStatus.Text = "Dashboard refreshed successfully.";
+
+            LoadMessages();
+        }
     }
 }

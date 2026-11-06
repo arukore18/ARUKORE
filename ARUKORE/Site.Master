@@ -1,59 +1,222 @@
+﻿
 <%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master.cs" Inherits="ARUKORE.SiteMaster" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title><%: Page.Title %></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08090d" />
 
+    <!-- PAGE TITLE -->
+    <title><%: Page.Title %> | ARU KORE</title>
+
+    <!-- WEBSITE CSS -->
     <link href="~/Content/site.css" rel="stylesheet" runat="server" />
 
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+    <!-- PAGE-SPECIFIC SEO -->
+    <asp:ContentPlaceHolder
+        ID="HeadContent"
+        runat="server" />
+
+    <style>
+    .header-social-links {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin-left: 20px;
+    }
+
+    .header-social-links a {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #a0a2b0;
+        border: 1px solid #272936;
+        border-radius: 50%;
+        transition: all .3s ease;
+    }
+
+    .header-social-links a:hover {
+        color: #ff4f9a;
+        border-color: #ff4f9a;
+        transform: translateY(-3px);
+    }
+
+    .header-social-links svg {
+        width: 17px;
+        height: 17px;
+        fill: currentColor;
+    }
+
+    @media (max-width: 768px) {
+        .header-social-links {
+            margin: 12px 0;
+            justify-content: center;
+        }
+    }
+</style>
+
+
 </head>
 
 <body>
+
     <form id="form1" runat="server">
 
-        <!-- Header -->
+        <!-- HEADER -->
         <header class="site-header">
-            <a class="logo" href="Default.aspx">ARU<span>KORE.</span></a>
 
-            <nav>
-                <a href="Default.aspx#about">About</a>
-                <a href="Default.aspx#projects">Projects</a>
-                <a href="Contact.aspx">Contact</a>
-            </nav>
-        </header>
+            <div class="header-container">
 
-        <!-- Main Content -->
-        <main>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-        </main>
+                <!-- LOGO: ADMIN DASHBOARD SHORTCUT -->
+                <a class="logo"
+                   href="<%= ResolveUrl("~/Admin/Dashboard.aspx") %>">
+                    ARU<span>KORE.</span>
+                </a>
 
-        <!-- Footer -->
-        
-<footer class="site-footer">
+                <!-- NAVIGATION -->
+                <nav class="main-nav" aria-label="Main navigation">
 
-    <a class="logo" href="Default.aspx">
-        ARU<span>KORE.</span>
+                    <a href="<%= ResolveUrl("~/Default.aspx") %>">
+                        Home
+                    </a>
+
+                    <a href="<%= ResolveUrl("~/Default.aspx#about") %>">
+                        About
+                    </a>
+
+                    <a href="<%= ResolveUrl("~/Default.aspx#skills") %>">
+                        Skills
+                    </a>
+
+                    <a href="<%= ResolveUrl("~/Default.aspx#projects") %>">
+                        Projects
+                    </a>
+
+                    <a href="<%= ResolveUrl("~/Contact.aspx") %>">
+                        Contact
+                    </a>
+
+                </nav>
+
+                <!-- SOCIAL MEDIA ICONS -->
+<div class="header-social-links">
+
+    <!-- INSTAGRAM -->
+    <a href="https://www.instagram.com/aru__kore/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Instagram">
+
+        <svg viewBox="0 0 24 24">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+        </svg>
     </a>
 
-    <p>Designed with purpose. Built with curiosity.</p>
+    <!-- YOUTUBE -->
+    <a href="https://www.youtube.com/channel/UCsl9tC3BhfCPOS09WEyYaIQ"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="YouTube">
 
-    <div class="social-links">
-        <a href="https://www.instagram.com/aru__kore/"
-           target="_blank"
-           rel="noopener noreferrer">
-            Instagram @aru__kore
-        </a>
-    </div>
+        <svg viewBox="0 0 24 24">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/>
+        </svg>
+    </a>
 
-    <span>� <%: DateTime.Now.Year %> ARU KORE</span>
+    <!-- GITHUB -->
+    <a href="https://github.com/arukore18"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="GitHub">
 
-</footer>
+        <svg viewBox="0 0 24 24">
+            <path d="M12 .9a11.1 11.1 0 0 0-3.5 21.6c.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.8 2.4 3.6 1.7.1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.3-5.1-5.5 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 1.1a10.4 10.4 0 0 1 5.5 0c2.1-1.4 3-1.1 3-1.1.6 1.5.2 2.6.1 2.9.7.8 1.1 1.8 1.1 3 0 4.2-2.6 5.2-5.1 5.5.4.3.8 1 .8 2v2.9c0 .3.2.7.8.6A11.1 11.1 0 0 0 12 .9z"/>
+        </svg>
+    </a>
 
+</div>
+
+                <!-- CONTACT BUTTON -->
+                <a class="header-cta"
+                   href="<%= ResolveUrl("~/Contact.aspx") %>">
+                    Let's Talk <span>↗</span>
+                </a>
+
+            </div>
+
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <main>
+
+            <asp:ContentPlaceHolder
+                ID="MainContent"
+                runat="server" />
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+
+            <div class="footer-container">
+
+                <!-- FOOTER BRAND -->
+                <div class="footer-brand">
+
+                    <!-- FOOTER LOGO: PUBLIC HOMEPAGE -->
+                    <a class="logo"
+                       href="<%= ResolveUrl("~/Default.aspx") %>">
+                        ARU<span>KORE.</span>
+                    </a>
+
+                    <p>
+                        Designed with purpose.<br />
+                        Built with curiosity.
+                    </p>
+
+                </div>
+
+                <!-- SOCIAL LINKS -->
+                <div class="footer-social">
+
+                    <span class="footer-label">
+                        CONNECT WITH ME
+                    </span>
+
+                    <a href="https://www.instagram.com/aru__kore/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Instagram @aru__kore ↗
+                    </a>
+
+                </div>
+
+                <!-- FOOTER BOTTOM -->
+                <div class="footer-bottom">
+
+                    <span>
+                        © <%: DateTime.Now.Year %> ARU KORE
+                    </span>
+
+                    <span>
+                        Made with passion &amp; purpose.
+                    </span>
+
+                    <a href="#top">
+                        Back to top ↑
+                    </a>
+
+                </div>
+            </div>
+
+        </footer>
 
     </form>
+
 </body>
 </html>
